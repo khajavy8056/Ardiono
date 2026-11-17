@@ -11,7 +11,3 @@ build/
 Thumbs.db
 .vscode/
 .idea/
-
-# فایل‌های موقت پایتون
-__pycache__/
-*.pyc

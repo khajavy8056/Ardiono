@@ -105,23 +105,11 @@ arduino-cli lib install "DHT sensor library" "Adafruit Unified Sensor" \
 
 ## ۴. نقشه اتصالات
 
-تصاویر شماتیک اتصالات (با کیفیت بالا و قابل بزرگ‌نمایی) در پوشهٔ `docs` قرار
-دارند. برای تولید دوبارهٔ آن‌ها از اسکریپت `docs/draw_schematics.py` استفاده
-کنید (پیش‌نیاز: `pip install matplotlib arabic-reshaper python-bidi`).
+شماتیک اتصالات پیکربندی پیش‌فرض پروژه (DHT22 + LCD 16x2 + فن دو سیمه با
+MOSFET) در فایل [`docs/schematic.png`](docs/schematic.png) قرار دارد. جزئیات
+اتصالات در شکل‌های متنی و جداول زیر آمده است.
 
-### ۴.۰ شماتیک‌های تصویری
-
-**پیکربندی پیش‌فرض — DHT22 + LCD 16x2 + فن دو سیمه (MOSFET):**
-
-![شماتیک پیکربندی پیش‌فرض](docs/schematic-default.png)
-
-**سنسور LM35 + LCD 16x2 + فن دو سیمه:**
-
-![شماتیک پیکربندی LM35](docs/schematic-lm35.png)
-
-**DHT22 + OLED 128x64 + فن چهار سیمه (PWM + TACH):**
-
-![شماتیک پیکربندی فن چهار سیمه](docs/schematic-4wire.png)
+![شماتیک اتصالات پروژه](docs/schematic.png)
 
 ### ۴.۱ سنسور DHT11 / DHT22
 
@@ -369,11 +357,7 @@ Ardiono/
 │   └── workflows/
 │       └── arduino-ci.yml            # کامپایل خودکار در GitHub Actions
 ├── docs/
-│   ├── schematic-default.png         # شماتیک پیش‌فرض (DHT22 + LCD + فن دو سیمه)
-│   ├── schematic-lm35.png            # شماتیک سنسور LM35
-│   ├── schematic-4wire.png           # شماتیک فن چهار سیمه
-│   ├── draw_schematics.py            # اسکریپت تولید شماتیک‌ها
-│   └── fonts/                        # فونت فارسی Vazirmatn
+│   └── schematic.png                 # شماتیک اتصالات پیکربندی پیش‌فرض
 └── SmartFanController/
     ├── SmartFanController.ino        # فایل اصلی (setup / loop)
     ├── config.h                      # تمام تنظیمات (فایل مرکزی)
