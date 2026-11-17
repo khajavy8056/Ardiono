@@ -1,0 +1,45 @@
+name: Arduino CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Compile (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: default-dht22-lcd-2wire
+            defines: ""
+          - name: dht11-oled-4wire
+            defines: "-DSENSOR_TYPE=1 -DDISPLAY_TYPE=2 -DFAN_TYPE=2 -DFAN_PWM_PIN=9 -DFAN4_TACH_PIN=3"
+          - name: lm35-nodisplay-2wire
+            defines: "-DSENSOR_TYPE=3 -DDISPLAY_TYPE=0 -DFAN_TYPE=1 -DFAN_PWM_PIN=10"
+          - name: dht22-lcd-4wire
+            defines: "-DSENSOR_TYPE=2 -DDISPLAY_TYPE=1 -DFAN_TYPE=2 -DFAN_PWM_PIN=10 -DFAN4_TACH_PIN=3"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+        with:
+          version: "1.x"
+      - run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+      - run: |
+          arduino-cli lib update-index
+          arduino-cli lib install "DHT sensor library" "Adafruit Unified Sensor" "LiquidCrystal I2C" "Adafruit SSD1306" "Adafruit GFX Library" "Adafruit BusIO"
+      - env:
+          BUILD_DEFINES: ${{ matrix.defines }}
+        run: |
+          arduino-cli compile --fqbn arduino:avr:uno --warnings all \
+            --build-path "build/${{ matrix.name }}" \
+            --build-property "compiler.cpp.extra_flags=${BUILD_DEFINES}" \
+            ./SmartFanController
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firmware-${{ matrix.name }}
+          path: build/${{ matrix.name }}/SmartFanController.ino.hex
+          if-no-files-found: error
