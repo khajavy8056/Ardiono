@@ -401,6 +401,11 @@ SmartFanController/hex/SmartFanController.uno.hex
 همچنین در هر اجرای موفق GitHub Actions، فایل HEX هر چهار پیکربندی به‌عنوان
 **Artifact** با نام `firmware-<پیکربندی>` قابل دانلود است.
 
+تست واقعی CI انجام شد: در اجرای اخیر GitHub Actions روی این مخزن، هر چهار
+پیکربندی با وضعیت `success` کامپایل شدند و چهار Artifact با نام‌های
+`firmware-default-dht22-lcd-2wire` ،`firmware-dht11-oled-4wire` ،
+`firmware-lm35-nodisplay-2wire` و `firmware-dht22-lcd-4wire` تولید شدند.
+
 ### آیا برای تأیید عملکرد واقعی به تست سخت‌افزاری نیاز است؟
 
 **بله، قطعاً.** کامپایل موفق فقط یعنی کد از نظر نحوی و منطقی سازگار است؛
